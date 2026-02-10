@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from app.database import Base
+from src.database import Base
 
 class ActivationToken(Base):
     __tablename__ = "activation_tokens"
