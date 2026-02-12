@@ -1,33 +1,40 @@
-from pydantic import BaseSettings
-from dotenv import load_dotenv
-
-load_dotenv()
+from pydantic_settings import BaseSettings
+from functools import lru_cache
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Online Cinema API"
-    API_V1_STR: str = "/api/v1"
+    # Database
+    DATABASE_URL: str
 
-    # Security
-    SECRET_KEY: str  # Generated using: openssl rand -hex 32
+    # JWT
+    SECRET_KEY: str
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
-    # Database
-    DATABASE_URL: str  # postgresql+asyncpg://user:password@localhost:5432/dbname
-
-    # Redis (for Celery)
-    REDIS_URL: str = "redis://localhost:6379/0"
-
     # Email
-    SMTP_SERVER: str
+    SMTP_HOST: str
     SMTP_PORT: int
     SMTP_USER: str
     SMTP_PASSWORD: str
+    FROM_EMAIL: str
+    FROM_NAME: str
+
+    # Frontend
+    FRONTEND_URL: str
+
+    # Redis
+    REDIS_URL: str
+
+    # Token Expiration
+    ACTIVATION_TOKEN_EXPIRE_HOURS: int = 24
+    PASSWORD_RESET_TOKEN_EXPIRE_HOURS: int = 1
 
     class Config:
         env_file = ".env"
+        case_sensitive = True
 
 
-settings = Settings()
+@lru_cache()
+def get_settings() -> Settings:
+    return Settings()
