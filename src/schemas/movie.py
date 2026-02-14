@@ -278,3 +278,7 @@ class PaginatedComments(BaseModel):
     page: int
     page_size: int
     total_pages: int
+
+
+class Message(BaseModel):
+    message: str
