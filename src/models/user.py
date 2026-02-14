@@ -11,7 +11,6 @@ class UserGroup(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(Enum(UserGroupEnum), unique=True, nullable=False)
 
-    # Relationships
     users = relationship("User", back_populates="group")
 
 
@@ -33,6 +32,12 @@ class User(Base):
     password_reset_token = relationship("PasswordResetToken", back_populates="user", uselist=False,
                                         cascade="all, delete-orphan")
     refresh_tokens = relationship("RefreshToken", back_populates="user", cascade="all, delete-orphan")
+
+    movie_likes = relationship("MovieLike", back_populates="user", cascade="all, delete-orphan")
+    movie_comments = relationship("MovieComment", back_populates="user", cascade="all, delete-orphan")
+    comment_likes = relationship("CommentLike", back_populates="user", cascade="all, delete-orphan")
+    movie_favorites = relationship("MovieFavorite", back_populates="user", cascade="all, delete-orphan")
+    movie_ratings = relationship("MovieRating", back_populates="user", cascade="all, delete-orphan")
 
 
 class UserProfile(Base):
