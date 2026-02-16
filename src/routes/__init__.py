@@ -1,3 +1,3 @@
-from app.routers import auth, users, admin
+from src.routes import auth, users, admin, movies, comments, moderator
 
-__all__ = ["auth", "users", "admin"]
+__all__ = ["auth", "users", "admin", "movies", "comments", "moderator"]
