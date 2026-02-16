@@ -5,16 +5,9 @@ from src.database import get_db
 from src.models import User, UserGroup, UserProfile, ActivationToken, PasswordResetToken, RefreshToken
 from src.models.enums import UserGroupEnum
 from src.schemas.user import (
-    UserRegister,
-    UserLogin,
-    Token,
-    TokenRefresh,
-    AccessToken,
-    PasswordChange,
-    PasswordResetRequest,
-    PasswordReset,
-    ActivationRequest,
-    Message,
+    UserRegister, UserLogin, Token, TokenRefresh, AccessToken,
+    PasswordChange, PasswordResetRequest, PasswordReset,
+    ActivationRequest, Message
 )
 from src.security import (
     verify_password, get_password_hash, create_access_token,

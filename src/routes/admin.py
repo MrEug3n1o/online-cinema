@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from src.database import get_db
-from src.models.user import User, UserGroup
+from src.models import User, UserGroup
 from src.models.enums import UserGroupEnum
 from src.schemas.user import UserResponse, UserGroupUpdate, UserActivate, Message
 from src.dependencies import get_admin_user
