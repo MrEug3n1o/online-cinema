@@ -1,5 +1,6 @@
 from src.schemas.user import *
 from src.schemas.movie import *
+from src.schemas.cart import *
 
 __all__ = [
     # Auth schemas
