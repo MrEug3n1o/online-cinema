@@ -5,6 +5,7 @@ from src.models.movie import (
     MovieLike, MovieComment, CommentLike, MovieFavorite, MovieRating,
     movie_genres, movie_directors, movie_stars
 )
+from src.models.cart import Cart, CartItem, Purchase, PurchaseItem
 
 __all__ = [
     "User",
@@ -28,4 +29,8 @@ __all__ = [
     "movie_genres",
     "movie_directors",
     "movie_stars",
+    "Cart",
+    "CartItem",
+    "Purchase",
+    "PurchaseItem",
 ]
