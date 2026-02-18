@@ -65,7 +65,6 @@ def update_genre(
             detail="Genre not found"
         )
 
-    # Check if new name conflicts
     if genre_data.name != genre.name:
         existing = db.query(Genre).filter(Genre.name == genre_data.name).first()
         if existing:
@@ -338,7 +337,6 @@ def create_movie(
         current_user: User = Depends(get_moderator_user)
 ):
     """Create a new movie (Moderator only)"""
-    # Check certification exists
     certification = db.query(Certification).filter(
         Certification.id == movie_data.certification_id
     ).first()
@@ -464,13 +462,35 @@ def delete_movie(
 ):
     """
     Delete a movie (Moderator only)
-    Note: Cannot delete if movie has been purchased by users (to be implemented with purchase module)
+    Cannot delete if movie has been purchased or is in user carts
     """
     movie = db.query(Movie).filter(Movie.id == movie_id).first()
     if not movie:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Movie not found"
+        )
+
+    from app.models import PurchaseItem, CartItem
+
+    purchases = db.query(PurchaseItem).filter(
+        PurchaseItem.movie_id == movie_id
+    ).count()
+
+    if purchases > 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Cannot delete movie that has been purchased by {purchases} user(s)"
+        )
+
+    cart_items = db.query(CartItem).filter(
+        CartItem.movie_id == movie_id
+    ).count()
+
+    if cart_items > 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"WARNING: Movie exists in {cart_items} user cart(s). Remove from carts first or proceed with force delete."
         )
 
     db.delete(movie)
