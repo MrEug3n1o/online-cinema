@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routes import auth, users, admin, movies, comments, moderator, cart, purchases, admin_cart
+from src.routes import auth, users, admin, movies, comments, moderator, cart, purchases, admin_cart, orders, admin_orders
 from src.database import engine, Base
 from src.config import get_settings
 
@@ -10,8 +10,8 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Online Cinema API",
-    description="API for online cinema platform with user authentication, authorization, movies, and shopping cart",
-    version="3.0.0"
+    description="Complete API for online cinema platform with authentication, movies, shopping cart, and order management",
+    version="4.0.0"
 )
 
 app.add_middleware(
@@ -31,6 +31,8 @@ app.include_router(moderator.router)
 app.include_router(cart.router)
 app.include_router(purchases.router)
 app.include_router(admin_cart.router)
+app.include_router(orders.router)
+app.include_router(admin_orders.router)
 
 
 @app.get("/")
@@ -38,7 +40,7 @@ def root():
     """Root endpoint"""
     return {
         "message": "Welcome to Online Cinema API",
-        "version": "3.0.0",
+        "version": "4.0.0",
         "docs": "/docs"
     }
 
