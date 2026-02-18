@@ -39,6 +39,12 @@ class User(Base):
     movie_favorites = relationship("MovieFavorite", back_populates="user", cascade="all, delete-orphan")
     movie_ratings = relationship("MovieRating", back_populates="user", cascade="all, delete-orphan")
 
+    cart = relationship("Cart", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    purchases = relationship("Purchase", back_populates="user", cascade="all, delete-orphan")
+    purchased_movies = relationship("PurchaseItem", back_populates="user", cascade="all, delete-orphan")
+
+    orders = relationship("Order", back_populates="user", cascade="all, delete-orphan")
+
 
 class UserProfile(Base):
     __tablename__ = "user_profiles"
