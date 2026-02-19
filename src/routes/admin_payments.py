@@ -94,7 +94,6 @@ def get_payment_detail(
             detail="Payment not found"
         )
 
-    # Build response
     items_response = []
     for item in payment.items:
         items_response.append(PaymentItemResponse(
