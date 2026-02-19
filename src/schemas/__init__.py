@@ -2,6 +2,7 @@ from src.schemas.user import *
 from src.schemas.movie import *
 from src.schemas.cart import *
 from src.schemas.order import *
+from src.schemas.payment import *
 
 __all__ = [
     # Auth schemas
