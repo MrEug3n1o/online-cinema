@@ -7,6 +7,7 @@ from src.models.movie import (
 )
 from src.models.cart import Cart, CartItem, Purchase, PurchaseItem
 from src.models.order import Order, OrderItem, OrderStatus
+from src.models.payment import Payment, PaymentItem, PaymentStatus
 
 __all__ = [
     "User",
@@ -37,4 +38,7 @@ __all__ = [
     "Order",
     "OrderItem",
     "OrderStatus",
+    "Payment",
+    "PaymentItem",
+    "PaymentStatus",
 ]
